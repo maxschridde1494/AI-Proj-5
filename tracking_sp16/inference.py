@@ -101,6 +101,51 @@ class DiscreteDistribution(dict):
         0.4
         >>> round(samples.count('d') * 1.0/N, 1)
         0.0
+        >>> dist = DiscreteDistribution()
+        >>> dist['a'] = 0
+        >>> dist['b'] = 1
+        >>> dist['c'] = 0
+        >>> dist['d'] = 0
+        >>> N = 100000.0
+        >>> samples = [dist.sample() for _ in range(int(N))]
+        >>> round(samples.count('a') * 1.0/N, 1)  # proportion of 'a'
+        0.0
+        >>> round(samples.count('b') * 1.0/N, 1)
+        1.0
+        >>> round(samples.count('c') * 1.0/N, 1)
+        0.0
+        >>> round(samples.count('d') * 1.0/N, 1)
+        0.0
+        >>> dist = DiscreteDistribution()
+        >>> dist['a'] = 0
+        >>> dist['b'] = .5
+        >>> dist['c'] = 0
+        >>> dist['d'] = .5
+        >>> N = 100000.0
+        >>> samples = [dist.sample() for _ in range(int(N))]
+        >>> round(samples.count('a') * 1.0/N, 1)  # proportion of 'a'
+        0.0
+        >>> round(samples.count('b') * 1.0/N, 1)
+        0.5
+        >>> round(samples.count('c') * 1.0/N, 1)
+        0.0
+        >>> round(samples.count('d') * 1.0/N, 1)
+        0.5
+        >>> dist = DiscreteDistribution()
+        >>> dist['a'] = .25
+        >>> dist['b'] = .25
+        >>> dist['c'] = .25
+        >>> dist['d'] = .25
+        >>> N = 100000.0
+        >>> samples = [dist.sample() for _ in range(int(N))]
+        >>> round(samples.count('a') * 1.0/N, 2)  # proportion of 'a'
+        0.25
+        >>> round(samples.count('b') * 1.0/N, 2)
+        0.25
+        >>> round(samples.count('c') * 1.0/N, 2)
+        0.25
+        >>> round(samples.count('d') * 1.0/N, 2)
+        0.25
         """
         "*** YOUR CODE HERE ***"
         self.normalize()
