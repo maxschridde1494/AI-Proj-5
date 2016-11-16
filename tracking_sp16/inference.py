@@ -75,6 +75,11 @@ class DiscreteDistribution(dict):
         {}
         """
         "*** YOUR CODE HERE ***"
+        total = float(self.total())
+        if total != 0:
+        	for key in self.keys():
+        		self[key] = self[key]/total
+
 
     def sample(self):
         """
@@ -98,6 +103,19 @@ class DiscreteDistribution(dict):
         0.0
         """
         "*** YOUR CODE HERE ***"
+        self.normalize()
+        orderedLst = list(sorted(self.items()))
+        total = 0
+        buckets, keys = [],[]
+        for param in orderedLst:
+        	if param[1] != 0:
+        		total += param[1]
+        		buckets.append(total)
+        		keys.append(param[0])
+        rand = random.random()
+        for i in range(len(buckets)):
+        	if rand <= buckets[i]:
+        		return keys[i]
 
 
 class InferenceModule:
