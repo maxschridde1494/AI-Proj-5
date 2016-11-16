@@ -230,6 +230,18 @@ class InferenceModule:
         Return the probability P(noisyDistance | pacmanPosition, ghostPosition).
         """
         "*** YOUR CODE HERE ***"
+        if ghostPosition == jailPosition: #ghost is in jail
+        	if noisyDistance == None:
+        		return 1
+        	else:
+        		return 0
+        else:
+        	if noisyDistance == None:
+        		return 0
+        	else:
+	        	trueDist = manhattanDistance(pacmanPosition, ghostPosition)
+	        	pNoisyGivenTrue = busters.getObservationProbability(noisyDistance, trueDist)
+	        	return pNoisyGivenTrue
 
     def setGhostPosition(self, gameState, ghostPosition, index):
         """
