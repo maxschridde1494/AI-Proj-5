@@ -367,7 +367,7 @@ class ExactInference(InferenceModule):
         for oldPos in self.allPositions:	
         	newPosDist = self.getPositionDistribution(gameState, oldPos)
         	for newPos in newPosDist.keys():
-        		newBeliefs[newPos] = newBeliefs[newPos] + newPosDist[newPos]*self.beliefs[oldPos]
+        		newBeliefs[newPos] += newPosDist[newPos]*self.beliefs[oldPos]
         for pos in self.allPositions:
         	self.beliefs[pos] = newBeliefs[pos]
 
