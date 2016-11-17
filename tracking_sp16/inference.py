@@ -395,9 +395,9 @@ class ParticleFilter(InferenceModule):
         self.particles for the list of particles.
         """
         self.particles = []
+        "*** YOUR CODE HERE ***"
         i = self.numParticles / len(self.legalPositions)
         remainder = self.numParticles%(len(self.legalPositions))
-        "*** YOUR CODE HERE ***"
         for particle in self.legalPositions:
         	for _ in range(i):
         		self.particles.append(particle)
@@ -477,6 +477,26 @@ class JointParticleFilter(ParticleFilter):
         """
         self.particles = []
         "*** YOUR CODE HERE ***"
+        cartesian = itertools.product(self.legalPositions, repeat=self.numGhosts)
+        cartesianShuffled = []
+        test = True 
+        while test != None:
+        	val = next(cartesian, None)
+        	if val != None:
+        		cartesianShuffled.append(val)
+        	else:
+        		test = None
+        random.shuffle(cartesianShuffled)
+        if len(cartesianShuffled) >= self.numParticles:
+        	for i in range(self.numParticles):
+        		self.particles.append(cartesianShuffled[i])
+        else:
+        	for _ in range(self.numParticles/len(cartesianShuffled)):
+        		for j in range(len(cartesianShuffled)):
+        			self.particles.append(cartesianShuffled[j])
+        	for k in range(self.numParticles%len(cartesianShuffled)):
+        		self.particles.append(cartesianShuffled[k])
+
 
     def addGhostAgent(self, agent):
         """
